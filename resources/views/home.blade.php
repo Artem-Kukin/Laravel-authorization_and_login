@@ -9,13 +9,21 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
-
                     {{ __('You are logged in!') }}
-                    <a href="{{route('users')}}"> {{ __('-> Отобразить список всех пользователей <-') }} </a>
+                    <div>
+                        <div>{{__('Name:')}} {{Auth::user()->name}}</div>
+                        <div>{{__('eMail:')}} {{Auth::user()->email}}</div>
+                        @if(Auth::user()->is_admin == true)
+                        <div>{{__('User status:')}} {{__('Admin')}}</div>
+                        <a href="{{route('users')}}"> {{ __('-> Отобразить список всех пользователей <-') }} </a>
+                        @else
+                        <div>{{__('User status:')}} {{__('User')}}</div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
